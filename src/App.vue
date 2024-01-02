@@ -1,26 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <BlogForm @submit-post="addPost" />
+    <BlogPost :posts="blogPosts" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BlogForm from './components/BlogForm.vue';
+import BlogPost from './components/BlogPost.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    BlogForm,
+    BlogPost
+  },
+  data() {
+    return {
+      blogPosts: []
+    };
+  },
+  methods: {
+    addPost(newPost) {
+      this.blogPosts.push(newPost);
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* Add your component styles here */
 </style>
