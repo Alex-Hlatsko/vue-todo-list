@@ -1,12 +1,15 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { getAllBlogs } from './firebaseService';
+import { db } from './firebase';
+import { getAllBlogs, addBlog } from './firebaseService';
 
 const app = createApp(App);
 
-// Передаем экземпляр db как глобальную переменную в приложение
 app.config.globalProperties.$db = {
-  getAllBlogs
+  getAllBlogs,
+  addBlog,
 };
+
+app.config.globalProperties.$db.db = db;
 
 app.mount('#app');

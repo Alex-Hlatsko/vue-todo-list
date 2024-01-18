@@ -1,32 +1,33 @@
 <template>
   <div id="app">
-    <BlogForm @submit-post="addPost" />
-    <BlogPost :posts="blogPosts" />
+    <blog-form @update-posts="fetchPosts" />
+    <blog-posts :posts="posts" />
   </div>
 </template>
 
 <script>
-import BlogForm from './components/BlogForm.vue';
-import BlogPost from './components/BlogPost.vue';
+import BlogForm from "./components/BlogForm.vue";
+import BlogPosts from "./components/BlogPosts.vue";
 
 export default {
   components: {
     BlogForm,
-    BlogPost
+    BlogPosts,
   },
   data() {
     return {
-      blogPosts: []
+      posts: [],
     };
   },
   methods: {
-    addPost(newPost) {
-      this.blogPosts.push(newPost);
-    }
-  }
+    fetchPosts() {
+      this.$db.getAllBlogs().then((posts) => {
+        this.posts = posts;
+      });
+    },
+  },
+  mounted() {
+    this.fetchPosts();
+  },
 };
 </script>
-
-<style>
-/* Add your component styles here */
-</style>

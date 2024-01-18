@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Blog Posts</h2>
+    <h2>Посты</h2>
     <ul>
       <li v-for="post in posts" :key="post.id">
         <h3>{{ post.title }}</h3>
@@ -12,18 +12,8 @@
 
 <script>
 export default {
-  data() {
-    return {
-      posts: []
-    };
+  props: {
+    posts: Array,
   },
-  async mounted() {
-    const blogs = await this.$db.getAllBlogs();
-    this.posts = blogs;
-  }
 };
 </script>
-
-<style scoped>
-/* Add your component styles here */
-</style>

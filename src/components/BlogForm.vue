@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h2>Create a new blog post</h2>
+    <h2>Добавить новый пост</h2>
     <form @submit.prevent="submitForm">
-      <label for="title">Title:</label>
-      <input type="text" id="title" v-model="title" required>
-      
-      <label for="content">Content:</label>
-      <textarea id="content" v-model="content" required></textarea>
-      
-      <button type="submit">Submit</button>
+      <label for="title">Заголовок поста:</label>
+      <input v-model="title" type="text" id="title" required />
+
+      <label for="desc">Описание:</label>
+      <textarea v-model="desc" id="desc" required></textarea>
+
+      <button type="submit">Добавить пост</button>
     </form>
   </div>
 </template>
@@ -17,20 +17,18 @@
 export default {
   data() {
     return {
-      title: '',
-      content: ''
+      title: "",
+      desc: "",
     };
   },
   methods: {
     submitForm() {
-      this.$emit('submit-post', { title: this.title, content: this.content });
-      this.title = '';
-      this.content = '';
-    }
-  }
+      this.$db.addBlog(this.title, this.desc).then(() => {
+        this.title = "";
+        this.desc = "";
+        this.$emit("update-posts");
+      });
+    },
+  },
 };
 </script>
-
-<style scoped>
-/* Add your component styles here */
-</style>
