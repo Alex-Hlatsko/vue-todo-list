@@ -31,3 +31,10 @@ export default {
   },
 };
 </script>
+<style>
+body{
+  background-color: #1D4B3D;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+</style>
